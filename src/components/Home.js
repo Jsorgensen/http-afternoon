@@ -16,23 +16,23 @@ class Home extends Component{
     componentWillMount(){
         axios.get('/api/featured/').then(res => {
             if(res.status === 200){
-
+                this.setState({posts: res.data})
             }else{
-
+                var error = 'error';
             }
+        }).catch((e)=>{
+            var error = e;
         })
     }
 
     render(){
-        this.state.posts.map(post => <BlogThumb blog={post} />);
-        const posts = null
+        const posts = this.state.posts.map(post => <BlogThumb blog={post} />);
 
         return(
             <div className="content" >
                 <Hero blog={this.state.posts[this.state.index]} />
                 <hr/>
                 <div className="blog-grid">
-                    {/* put your mapped blogs here */}
                     {posts}
                 </div>
             </div>
