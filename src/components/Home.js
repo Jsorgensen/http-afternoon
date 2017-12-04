@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Hero from './subcomponents/Hero';
 import BlogThumb from './subcomponents/BlogThumb';
 
-// import axios
+import axios from 'axios'
 
 class Home extends Component{
     constructor(){
@@ -13,11 +13,18 @@ class Home extends Component{
         }
     }
 
-    // insert componentWillMount:
-    
+    componentWillMount(){
+        axios.get('/api/featured/').then(res => {
+            if(res.status === 200){
+
+            }else{
+
+            }
+        })
+    }
 
     render(){
-        // map over your recommended blogs here, replace null.
+        this.state.posts.map(post => <BlogThumb blog={post} />);
         const posts = null
 
         return(
