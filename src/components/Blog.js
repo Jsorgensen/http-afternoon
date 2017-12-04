@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Formated from './subcomponents/Formated';
 
-// import axios
+import axios from 'axios'
 
 class Blog extends Component{
     constructor(){
@@ -12,7 +12,20 @@ class Blog extends Component{
         }
     }
 
-    // insert componentWillMount method
+    componentWillMount(){
+        var id = this.props.match.params.id;
+        axios.get('/api/blog/' + id).then(res=>{
+            if(res.status === 200){
+                console.log(res);
+                this.setState({blog: res.data})
+            }else{
+                console.log('crap error');
+                console.log(res);
+            }
+        }).catch((e)=>{
+            console.log(e);
+        })
+    }
 
     
     render(){
