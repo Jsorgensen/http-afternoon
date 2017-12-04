@@ -16,7 +16,10 @@ class Home extends Component{
     componentWillMount(){
         axios.get('/api/featured/').then(res => {
             if(res.status === 200){
-                this.setState({posts: res.data})
+                this.setState({
+                    index: (~~(Math.random() * res.data.length) + 0),
+                    posts: res.data
+                })
             }else{
                 var error = 'error';
             }
